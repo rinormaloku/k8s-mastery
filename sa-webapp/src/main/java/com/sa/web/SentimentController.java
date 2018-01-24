@@ -3,7 +3,6 @@ package com.sa.web;
 import com.sa.web.dto.SentenceDto;
 import com.sa.web.dto.SentimentDto;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
@@ -11,19 +10,21 @@ import org.springframework.web.client.RestTemplate;
 @RestController
 public class SentimentController {
 
-    @Value("${sentiment.api.url}")
-    private String sentimentApiUrl;
+    @Value("${sa.logic.api.url}")
+    private String saLogicApiUrl;
 
-    @ResponseStatus(HttpStatus.OK)
-    @GetMapping("/")
-    public void healthProbe() {}
-
-    @PostMapping("/wap/sentiment")
+    @PostMapping("/sentiment")
     public SentimentDto sentimentAnalysis(@RequestBody SentenceDto sentenceDto) {
         RestTemplate restTemplate = new RestTemplate();
 
-        return restTemplate.postForEntity(sentimentApiUrl + "/analyse/sentiment",
+        return restTemplate.postForEntity(saLogicApiUrl + "/analyse/sentiment",
                 sentenceDto, SentimentDto.class)
                 .getBody();
     }
+
+    @GetMapping("/testHealth")
+    public void testHealth() {
+    }
 }
+
+
