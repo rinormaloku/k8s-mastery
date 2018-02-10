@@ -10,9 +10,6 @@ const style = {
     marginLeft: 12,
 };
 
-/*
-* Create another component
-* */
 class App extends Component {
     constructor(props) {
         super(props);
@@ -23,7 +20,7 @@ class App extends Component {
     };
 
     analyzeSentence() {
-        fetch('http://52.166.32.165/sentiment', {
+        fetch('http://localhost:8080/sentiment', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -52,7 +49,7 @@ class App extends Component {
                         <h2>Sentiment Analyser</h2>
                         <TextField ref={ref => this.textField = ref} onKeyUp={this.onEnterPress.bind(this)}
                                    hintText="Type your sentence."/>
-                        <RaisedButton label="Send" style={style} onClick={this.analyzeSentence.bind(this)}/>
+                        <RaisedButton  label="Send" backgroundColor="#a4c639" style={style} onClick={this.analyzeSentence.bind(this)}/>
                         {polarityComponent}
                     </Paper>
                 </div>
