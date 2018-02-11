@@ -1,0 +1,23 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: sa-logic
+spec:
+  replicas: 2
+  minReadySeconds: 15
+  strategy:
+    type: RollingUpdate
+    rollingUpdate: 
+      maxUnavailable: 1
+      maxSurge: 1 
+  template:
+    metadata:
+      labels:
+        app: sa-logic
+    spec:
+      containers:
+        - image: rinormaloku/sentiment-analysis
+          imagePullPolicy: Always
+          name: sa-logic
+          ports:
+            - containerPort: 5000

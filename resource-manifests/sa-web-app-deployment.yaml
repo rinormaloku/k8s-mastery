@@ -1,0 +1,26 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: sa-web-app
+spec:
+  replicas: 2
+  minReadySeconds: 15
+  strategy:
+    type: RollingUpdate
+    rollingUpdate: 
+      maxUnavailable: 1
+      maxSurge: 1 
+  template:
+    metadata:
+      labels:
+        app: sa-web-app
+    spec:
+      containers:
+      - image: rinormaloku/sentiment-analysis-web-app
+        imagePullPolicy: Always
+        name: sa-web-app
+        env:
+          - name: SA_LOGIC_API_URL
+            value: "http://sa-logic"
+        ports:
+          - containerPort: 8080
