@@ -10,7 +10,8 @@
     "prop-types": "latest"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "set:env": "node setenv.js > ./src/config.json",
+    "start": "npm run set:env && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
