@@ -21,10 +21,6 @@ public class SentimentController {
                 sentenceDto, SentimentDto.class)
                 .getBody();
     }
-
-    @GetMapping("/testHealth")
-    public void testHealth() {
-    }
 }
 
 
