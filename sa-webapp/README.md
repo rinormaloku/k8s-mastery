@@ -9,7 +9,7 @@
 
 ## Running the container
 ``` 
-$ docker run -d -p 8080:8080 $DOCKER_USER_ID/sentiment-analysis-web-app -e SA_LOGIC_API_URL='http://192.168.99.100:5000'  
+$ docker run -d -p 8080:8080 $DOCKER_USER_ID/sentiment-analysis-web-app -e SA_LOGIC_API_URL='http://<localhost or docker machine ip>:5000'  
 ```
 
 ## Pushing the container

@@ -1,13 +1,13 @@
 ## Building the Docker Container
 
 ```
-$ docker build -f Dockerfile -t $DOCKER_ID_USER/sentiment-analysis-logic .
+$ docker build -f Dockerfile -t $DOCKER_USER_ID/sentiment-analysis-logic .
 ```
 
 ## Running the Docker Container
 
 ```
-$ docker run -d -p 5050:5000 $DOCKER_ID_USER/sentiment-analysis-logic
+$ docker run -d -p 5050:5000 $DOCKER_USER_ID/sentiment-analysis-logic
 ```
 
 The app is listening by default on port 5000. The 5050 port of the host machine is mapped to the port 5000 of the container.
@@ -28,12 +28,12 @@ Request body:
 
 ```
 {
-    "sentence": "I hate you, you son of a bitch!"
+    "sentence": "I hate you!"
 }
 ```
 
 ## Pushing to Docker Hub
 
 ```
-$ docker push $DOCKER_ID_USER/sentiment-analysis-logic
+$ docker push $DOCKER_USER_ID/sentiment-analysis-logic
 ```
