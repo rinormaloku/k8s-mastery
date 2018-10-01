@@ -1,3 +1,1 @@
-This repository contains all the source files needed to follow the series [Kubernetes and everything else](https://rinormaloku.com/series/kubernetes-and-everything-else/)
-
-This is the best introduction to Kubernetes and Everything related to be able to deploy scalable and resilient applications on Kubernetes managed clusters.
+On this branch we build upon the knowledge of kubernetes introduced in the article [Learn kuberntes in under 3 hours: A detailed guide to Orchestrating Containers](https://medium.freecodecamp.org/learn-kubernetes-in-under-3-hours-a-detailed-guide-to-orchestrating-containers-114ff420e882), by using **Ingress controller** for routing to the microservices.
