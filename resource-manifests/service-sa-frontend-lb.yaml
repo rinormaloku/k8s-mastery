@@ -1,12 +1,11 @@
 apiVersion: v1
-kind: Service              # 1
+kind: Service
 metadata:
-  name: sa-frontend-lb
+  name: sa-frontend
 spec:
-  type: LoadBalancer       # 2
   ports:
-  - port: 80               # 3
-    protocol: TCP          # 4
-    targetPort: 80         # 5
-  selector:                # 6
-    app: sa-frontend       # 7
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: sa-frontend
