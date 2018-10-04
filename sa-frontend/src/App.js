@@ -1,6 +1,5 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import './App.css';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import Paper from 'material-ui/Paper';
@@ -32,28 +31,32 @@ class App extends Component {
     }
 
     onEnterPress = e => {
-        if (e.key === 'Enter') {
+        if(e.key === 'Enter') {
             this.analyzeSentence();
         }
     };
 
+
     render() {
+        if(!this.props.auth.isAuthenticated()) {
+            this.props.auth.login();
+            return;
+        }
+
         const polarityComponent = this.state.polarity !== undefined ?
             <Polarity sentence={this.state.sentence} polarity={this.state.polarity}/> :
             null;
 
         return (
-            <MuiThemeProvider>
-                <div className="centerize">
-                    <Paper zDepth={1} className="content">
-                        <h2>Sentiment Analyser</h2>
-                        <TextField ref={ref => this.textField = ref} onKeyUp={this.onEnterPress.bind(this)}
-                                   hintText="Type your sentence."/>
-                        <RaisedButton  label="Send" style={style} onClick={this.analyzeSentence.bind(this)}/>
-                        {polarityComponent}
-                    </Paper>
-                </div>
-            </MuiThemeProvider>
+            <div className="centerize">
+                <Paper zDepth={1} className="content">
+                    <h2>Sentiment Analyser</h2>
+                    <TextField ref={ref => this.textField = ref} onKeyUp={this.onEnterPress.bind(this)}
+                               hintText="Type your sentence."/>
+                    <RaisedButton  label="Send" style={style} onClick={this.analyzeSentence.bind(this)}/>
+                    {polarityComponent}
+                </Paper>
+            </div>
         );
     }
 }
