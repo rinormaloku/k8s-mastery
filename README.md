@@ -1,3 +1,9 @@
-This repository contains all the source files needed to follow the series [Kubernetes and everything else](https://rinormaloku.com/series/kubernetes-and-everything-else/)
+To get up and running with the application execute:
 
-This is the best introduction to Kubernetes and Everything related to be able to deploy scalable and resilient applications on Kubernetes managed clusters.
+```
+$ docker-compose up
+```
+
+And open http://localhost
+
+For a demonstration of running this applicaiton in Kubernetes and other examples go back to the [master branch](https://github.com/rinormaloku/k8s-mastery)
