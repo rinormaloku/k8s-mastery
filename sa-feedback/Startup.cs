@@ -15,7 +15,7 @@ namespace SA.Feedback
             Configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }
+        private IConfiguration Configuration { get; }
 
         public void ConfigureServices(IServiceCollection services)
         {
@@ -28,6 +28,8 @@ namespace SA.Feedback
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            MigrateDatabase(app);
+            
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -38,6 +40,14 @@ namespace SA.Feedback
             }
 
             app.UseMvc();
+        }
+
+        private static void MigrateDatabase(IApplicationBuilder app)
+        {
+            using (var scope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+            {
+                scope.ServiceProvider.GetService<FeedbackContext>().Database.Migrate();
+            }
         }
     }
 }
