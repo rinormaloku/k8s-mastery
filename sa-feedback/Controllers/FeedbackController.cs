@@ -4,7 +4,7 @@ using SA.Feedback.Model;
 
 namespace SA.Feedback.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class FeedbackController : ControllerBase
     {

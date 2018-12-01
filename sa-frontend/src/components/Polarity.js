@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import Feedback from "./Feedback";
 
 class Polarity extends Component {
 
@@ -8,15 +9,20 @@ class Polarity extends Component {
         polarity: PropTypes.number.isRequired
     };
 
-    render() {
+    constructor(props) {
+        super(props);
         const green = Math.round((this.props.polarity + 1) * 128);
         const red = 255 - green;
-        const textColor = {
+        this.polarityColor = {
             backgroundColor: 'rgb(' + red + ', ' + green + ', 0)',
-            padding: '15px'
         };
+    }
 
-        return <div style={textColor}>"{this.props.sentence}" has polarity of {this.props.polarity} </div>
+    render() {
+        return <div style={this.polarityColor}>
+            <p>"{this.props.sentence}" has polarity of {this.props.polarity}</p>
+            <Feedback {...this.props}/>
+        </div>
     }
 }
 
