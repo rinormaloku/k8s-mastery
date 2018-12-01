@@ -2,7 +2,7 @@
 
 namespace SA.Feedback.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class initialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,7 +13,7 @@ namespace SA.Feedback.Migrations
                     ID = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Sentence = table.Column<string>(nullable: true),
-                    Sentiment = table.Column<decimal>(nullable: false),
+                    Polarity = table.Column<decimal>(nullable: false),
                     Correct = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>

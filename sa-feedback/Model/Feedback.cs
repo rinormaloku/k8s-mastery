@@ -4,7 +4,7 @@ namespace SA.Feedback.Model
     {
         public int ID { get; set; }
         public string Sentence { get; set; }
-        public decimal Sentiment { get; set; }
+        public decimal Polarity { get; set; }
         public bool Correct { get; set; }
     }
 }

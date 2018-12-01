@@ -22,9 +22,9 @@ namespace SA.Feedback.Migrations
 
                     b.Property<bool>("Correct");
 
-                    b.Property<string>("Sentence");
+                    b.Property<decimal>("Polarity");
 
-                    b.Property<decimal>("Sentiment");
+                    b.Property<string>("Sentence");
 
                     b.HasKey("ID");
 

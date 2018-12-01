@@ -31,7 +31,7 @@ services:
       context: ./sa-feedback
     image: rinormaloku/sentiment-analysis-feedback:local
     ports:
-    - "6000:80"
+    - "9000:80"
     environment:
     - DATABASE_DIR=/usr/database
     volumes:

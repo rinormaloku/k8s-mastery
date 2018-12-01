@@ -8,8 +8,8 @@ using SA.Feedback.Model;
 namespace SA.Feedback.Migrations
 {
     [DbContext(typeof(FeedbackContext))]
-    [Migration("20181125145126_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20181201104824_initialCreate")]
+    partial class initialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -24,9 +24,9 @@ namespace SA.Feedback.Migrations
 
                     b.Property<bool>("Correct");
 
-                    b.Property<string>("Sentence");
+                    b.Property<decimal>("Polarity");
 
-                    b.Property<decimal>("Sentiment");
+                    b.Property<string>("Sentence");
 
                     b.HasKey("ID");
 

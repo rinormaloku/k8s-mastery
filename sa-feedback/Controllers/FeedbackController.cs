@@ -1,11 +1,15 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Net;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using SA.Feedback.Model;
 
 namespace SA.Feedback.Controllers
 {
-    [Route("[controller]")]
     [ApiController]
+    [Route("[controller]")]
     public class FeedbackController : ControllerBase
     {
         private readonly FeedbackContext _feedbackContext;
@@ -15,11 +19,19 @@ namespace SA.Feedback.Controllers
             _feedbackContext = feedbackContext;
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Get()
+        {
+            return Ok(await _feedbackContext.Feedback.ToListAsync());   
+        }
+        
         [HttpPost]
-        public async Task Post([FromBody] Model.Feedback feedback)
+        public async Task<IActionResult> Post([FromBody] Model.Feedback feedback)
         {
             _feedbackContext.Feedback.Add(feedback);
             await _feedbackContext.SaveChangesAsync();
+            
+            return StatusCode(StatusCodes.Status201Created);
         }
     }
 }

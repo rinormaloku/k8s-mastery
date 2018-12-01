@@ -19,8 +19,19 @@ namespace SA.Feedback
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAll", builder =>
+                {
+                    builder.AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader()
+                        .AllowCredentials();
+                });
+            });
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-            
+
             // Override env variable DATABASE_DIR to specify directory
             services.AddDbContext<FeedbackContext>(options =>
                 options.UseSqlite($"Data Source={Configuration["DATABASE_DIR"]}/Feedback.db"));
@@ -29,7 +40,7 @@ namespace SA.Feedback
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             MigrateDatabase(app);
-            
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -38,7 +49,8 @@ namespace SA.Feedback
             {
                 app.UseHsts();
             }
-
+            
+            app.UseCors("AllowAll");
             app.UseMvc();
         }
 

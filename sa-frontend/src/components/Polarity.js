@@ -4,7 +4,7 @@ import Feedback from "./Feedback";
 
 class Polarity extends Component {
 
-    propTypes = {
+    static propTypes = {
         sentence: PropTypes.string.isRequired,
         polarity: PropTypes.number.isRequired
     };

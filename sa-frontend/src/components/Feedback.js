@@ -5,7 +5,7 @@ import Snackbar from 'material-ui/Snackbar';
 
 class Feedback extends Component {
 
-    propTypes = {
+    static propTypes = {
         sentence: PropTypes.string.isRequired,
         polarity: PropTypes.number.isRequired
     };
@@ -13,10 +13,19 @@ class Feedback extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            beforeFeedbackSubmitted: true,
             snackbarOpen: false,
-            snackbarMessage: undefined
+            snackbarMessage: ''
         };
         this.submitWrongAnalysis = this.submitWrongAnalysis.bind(this);
+    }
+
+    componentWillReceiveProps(nextProps) {
+        this.setState({
+            beforeFeedbackSubmitted: true,
+            snackbarOpen: false,
+            snackbarMessage: ''
+        });
     }
 
     submitCorrectAnalysis = () => {
@@ -28,21 +37,25 @@ class Feedback extends Component {
     };
 
     submitFeedback = isCorrect => {
-        return fetch('/feedback', {
+        fetch('http://localhost:9000/feedback', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(Object.assign({}, this.props, {correct: isCorrect}))
         })
-            .then(response => this.showSnackbar(response.status))
+            .then(response => this.showSnackbarAndHideFeedbackOnSuccess(response.status))
+            .catch(() => this.showSnackbarAndHideFeedbackOnSuccess(null))
     };
 
-    showSnackbar = status => {
+    showSnackbarAndHideFeedbackOnSuccess = status => {
         const success = status === 201;
-        const message = success ? "Thanks for the feedback :)" : "Service not available";
+        const message = success ? "Thanks for the feedback :)" : "Service currently not available";
+        const keepFeedbackQueryOnServiceFailure = !success;
+
         this.setState({
-            snackbarOpen: success,
+            beforeFeedbackSubmitted: keepFeedbackQueryOnServiceFailure,
+            snackbarOpen: true,
             snackbarMessage: message
         })
     };
@@ -50,11 +63,11 @@ class Feedback extends Component {
     handleClose = () => {
         this.setState({
             snackbarOpen: false,
-            snackbarMessage: undefined,
+            snackbarMessage: '',
         });
     };
 
-    render() {
+    feedbackQuery() {
         return <div className="feedback">
             <p>Was the analysis correct?</p>
             <IconButton onClick={this.submitCorrectAnalysis}>
@@ -63,6 +76,16 @@ class Feedback extends Component {
             <IconButton onClick={this.submitWrongAnalysis}>
                 <i className="material-icons md-16 md-light">close</i>
             </IconButton>
+        </div>;
+    }
+
+    render() {
+        const feedbackQueryComponent = this.state.beforeFeedbackSubmitted ?
+            this.feedbackQuery() :
+            null;
+
+        return <div>
+            {feedbackQueryComponent}
             <Snackbar
                 open={this.state.snackbarOpen}
                 message={this.state.snackbarMessage}
