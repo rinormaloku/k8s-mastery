@@ -16,7 +16,7 @@ spec:
         app: sa-logic
     spec:
       containers:
-      - image: rinormaloku/sentiment-analysis-logic:ingress
+      - image: rinormaloku/sentiment-analysis-logic:feedback
         imagePullPolicy: Always
         name: sa-logic
         ports:

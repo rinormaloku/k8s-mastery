@@ -37,7 +37,7 @@ class Feedback extends Component {
     };
 
     submitFeedback = isCorrect => {
-        fetch('http://localhost:9000/feedback', {
+        fetch('/feedback', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

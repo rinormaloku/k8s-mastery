@@ -1,0 +1,58 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: sa-feedback
+spec:
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: sa-feedback
+    spec:
+      containers:
+      - image: rinormaloku/sentiment-analysis-feedback:feedback
+        imagePullPolicy: Always
+        name: sa-feedback
+        env:
+        - name: DATABASE_DIR
+          value: /usr/database
+        ports:
+          - containerPort: 80
+        volumeMounts:
+        - name: sqlite-volume
+          mountPath: /usr/database
+      volumes:
+      - name: sqlite-volume
+        persistentVolumeClaim:
+          claimName: sqlite-pvc
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: sqlite-pv
+  labels:
+    volume: sqlite
+spec:
+  storageClassName: hostpath
+  capacity:
+    storage: 1Gi
+  accessModes:
+  - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  hostPath:
+    path: "/db"
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: sqlite-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+  selector:
+    matchLabels:
+      volume: sqlite

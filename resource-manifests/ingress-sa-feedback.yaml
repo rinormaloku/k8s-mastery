@@ -1,7 +1,7 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: sa-ingress-web-app
+  name: sa-ingress-feedback
   annotations:
     kubernetes.io/ingress.class: nginx
     nginx.ingress.kubernetes.io/ssl-redirect: "false"
@@ -9,7 +9,7 @@ spec:
   rules:
   - http:
       paths:
-      - path: /sentiment
+      - path: /feedback
         backend:
-          serviceName: sa-web-app
+          serviceName: sa-feedback
           servicePort: 80

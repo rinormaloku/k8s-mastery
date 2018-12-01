@@ -4,7 +4,6 @@ metadata:
   name: sa-ingress-frontend
   annotations:
     kubernetes.io/ingress.class: nginx
-    # ingress.kubernetes.io/add-base-url: "true"
     nginx.ingress.kubernetes.io/ssl-redirect: "false"
 spec:
   rules:
