@@ -28,31 +28,14 @@ spec:
           claimName: sqlite-pvc
 ---
 apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: sqlite-pv
-  labels:
-    volume: sqlite
-spec:
-  storageClassName: hostpath
-  capacity:
-    storage: 1Gi
-  accessModes:
-  - ReadWriteOnce
-  persistentVolumeReclaimPolicy: Retain
-  hostPath:
-    path: "/db"
----
-apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: sqlite-pvc
 spec:
+  storageClassName: hostpath-ssd
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
       storage: 1Gi
-  selector:
-    matchLabels:
-      volume: sqlite
+      

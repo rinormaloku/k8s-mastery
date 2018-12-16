@@ -16,4 +16,8 @@ To run the app execute the command below (from the directory of sa-feedback)
 $ dotnet run
 ```
 
-For additional technical information follow the README in [SA-Frontend directory](sa-feedback\README.md)
+For additional information follow the README in [SA-Frontend directory](sa-feedback\README.md)
+
+## Setting up the entire application in Kubernetes
+
+Follow the instructions in the (getting started)[./getting-started.md] guide. 
