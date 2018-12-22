@@ -33,6 +33,6 @@ services:
     ports:
     - "9000:80"
     environment:
-    - DATABASE_DIR=/usr/database
+    - DATABASE_DIR=/usr/db
     volumes:
-     - "./sa-feedback/Database:/usr/database"
+     - "./sa-feedback/Database:/usr/db"

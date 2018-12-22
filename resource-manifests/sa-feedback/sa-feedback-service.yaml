@@ -16,26 +16,41 @@ spec:
         name: sa-feedback
         env:
         - name: DATABASE_DIR
-          value: /usr/database
+          value: /usr/db
         ports:
           - containerPort: 80
         volumeMounts:
         - name: sqlite-volume
-          mountPath: /usr/database
+          mountPath: /usr/db
       volumes:
       - name: sqlite-volume
         persistentVolumeClaim:
           claimName: sqlite-pvc
 ---
 apiVersion: v1
-kind: PersistentVolumeClaim
+kind: Service
 metadata:
-  name: sqlite-pvc
+  name: sa-feedback
 spec:
-  storageClassName: hostpath-ssd
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 1Gi
-      
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: sa-feedback
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: sa-ingress-feedback
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /feedback
+        backend:
+          serviceName: sa-feedback
+          servicePort: 80
