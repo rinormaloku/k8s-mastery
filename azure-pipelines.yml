@@ -54,5 +54,5 @@ jobs:
   - bash: find resource-manifests -type f -name "*.yaml" -print0 | xargs -0 sed -i "s/{{TAG}}/$(build.buildId)/"
   - task: PublishBuildArtifacts@1
     inputs:
-      pathtoPublish: '$(Build.ArtifactStagingDirectory)/resource-manifests'
+      pathtoPublish: '$(System.DefaultWorkingDirectory)/resource-manifests'
       artifactName: resource-manifests
