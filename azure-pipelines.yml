@@ -48,3 +48,8 @@ jobs:
     displayName: 'docker build feedback'
   - script: docker push $(sa-feedback-image-name) 
     displayName: 'docker push feedback'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathtoPublish: '$(Build.ArtifactStagingDirectory)/resource-manifests'
+    artifactName: resource-manifests
