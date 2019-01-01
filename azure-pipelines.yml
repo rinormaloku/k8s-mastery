@@ -1,20 +1,15 @@
-# Docker image
-# Build a Docker image to deploy, run, or push to a container registry.
-# Add steps that use Docker Compose, tag images, push to a registry, run an image, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/languages/docker
-
 trigger:
-- azure-dev-ops
+- azure-dev-ops      # 1
 
-variables:
-  sa-frontend-image-name: 'rinormaloku/sentiment-analysis-frontend:$(build.buildId)'
-  sa-web-app-image-name: 'rinormaloku/sentiment-analysis-web-app:$(build.buildId)'
-  sa-logic-image-name: 'rinormaloku/sentiment-analysis-logic:$(build.buildId)'
-  sa-feedback-image-name: 'rinormaloku/sentiment-analysis-feedback:$(build.buildId)'
+variables:           # 2
+  sa-frontend-image-name: '$(dockerId)/sentiment-analysis-frontend:$(build.buildId)'
+  sa-web-app-image-name: '$(dockerId)/sentiment-analysis-web-app:$(build.buildId)'
+  sa-logic-image-name: '$(dockerId)/sentiment-analysis-logic:$(build.buildId)'
+  sa-feedback-image-name: '$(dockerId)/sentiment-analysis-feedback:$(build.buildId)'
 
-jobs:
-- job: SA_Frontend
-  steps:
+jobs:                # 3
+- job: SA_Frontend   # 3.a
+  steps:             # 4
   - script: docker login -u $(dockerId) -p $(password)
     displayName: 'docker login'
   - script: docker build -f ./sa-frontend/Dockerfile -t $(sa-frontend-image-name) ./sa-frontend
@@ -22,7 +17,7 @@ jobs:
   - script: docker push $(sa-frontend-image-name) 
     displayName: 'docker push frontend'
 
-- job: SA_WebApp
+- job: SA_WebApp     # 3.b
   steps:
   - script: docker login -u $(dockerId) -p $(password)
     displayName: 'docker login'
@@ -51,7 +46,7 @@ jobs:
 
 - job: Publish_Artifacts
   steps:
-  - bash: find resource-manifests -type f -name "*.yaml" -print0 | xargs -0 sed -i "s/{{TAG}}/$(build.buildId)/"
+  - bash: find resource-manifests -type f -name "*.yaml" -print0 | xargs -0 sed -i -e "s/{{TAG}}/$(build.buildId)/" -e "s/{{DOCKER_USER}}/$(dockerId)/"
   - task: PublishBuildArtifacts@1
     inputs:
       pathtoPublish: '$(System.DefaultWorkingDirectory)/resource-manifests'
