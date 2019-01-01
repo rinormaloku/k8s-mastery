@@ -4,10 +4,7 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/docker
 
 trigger:
-- master
-
-pool:
-  vmImage: 'Ubuntu-16.04'
+- azure-dev-ops
 
 variables:
   sa-frontend-image-name: 'rinormaloku/sentiment-analysis-frontend:$(build.buildId)'
