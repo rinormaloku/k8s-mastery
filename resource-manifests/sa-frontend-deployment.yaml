@@ -16,7 +16,7 @@ spec:
         app: sa-frontend
     spec:
       containers:
-      - image: rinormaloku/sentiment-analysis-frontend:ingress
+      - image: rinormaloku/sentiment-analysis-frontend:feedback
         imagePullPolicy: Always
         name: sa-frontend
         ports:

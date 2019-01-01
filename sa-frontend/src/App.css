@@ -47,3 +47,22 @@
 h2{
   text-align: center;
 }
+
+.material-icons.md-16 { font-size: 16px; }
+.material-icons.md-light { color: #fff; }
+
+.feedback {
+  height: 20px;
+  width: fit-content;
+  font-style: italic;
+  font-size: 12px;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  margin: 0 auto;
+}
+
+p {
+  padding: 8px;
+  margin: 0;
+}
