@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: sa-logic
 spec:
-  replicas: 2
+  replicas: 1
   minReadySeconds: 15
   strategy:
     type: RollingUpdate
@@ -16,8 +16,8 @@ spec:
         app: sa-logic
     spec:
       containers:
-        - image: rinormaloku/sentiment-analysis-logic
-          imagePullPolicy: Always
-          name: sa-logic
-          ports:
-            - containerPort: 5000
+      - image: rinormaloku/sentiment-analysis-logic:ingress
+        imagePullPolicy: Always
+        name: sa-logic
+        ports:
+          - containerPort: 5000

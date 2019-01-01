@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: sa-web-app
 spec:
-  replicas: 2
+  replicas: 1
   minReadySeconds: 15
   strategy:
     type: RollingUpdate
@@ -16,7 +16,7 @@ spec:
         app: sa-web-app
     spec:
       containers:
-      - image: rinormaloku/sentiment-analysis-web-app
+      - image: rinormaloku/sentiment-analysis-web-app:ingress
         imagePullPolicy: Always
         name: sa-web-app
         env:

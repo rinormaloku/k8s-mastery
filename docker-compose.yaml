@@ -1,0 +1,38 @@
+version: "2.0"
+
+services:
+  sa-frontend:
+    build: 
+      context: ./sa-frontend
+    image: rinormaloku/sentiment-analysis-frontend:feedback
+    ports:
+    - "80:80"
+
+  sa-webapp:
+    build: 
+      context: ./sa-webapp
+    image: rinormaloku/sentiment-analysis-web-app:feedback
+    ports:
+    - "8080:8080"
+    environment:
+    - SA_LOGIC_API_URL=http://sa-logic:5000
+    links:
+    - sa-logic
+
+  sa-logic:
+    build:
+      context: ./sa-logic
+    image: rinormaloku/sentiment-analysis-logic:feedback
+    ports:
+    - "5000:5000"
+
+  sa-feedback:
+    build:
+      context: ./sa-feedback
+    image: rinormaloku/sentiment-analysis-feedback:feedback
+    ports:
+    - "9000:80"
+    environment:
+    - DATABASE_DIR=/usr/db
+    volumes:
+     - "./sa-feedback/Database:/usr/db"
