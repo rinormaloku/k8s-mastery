@@ -1,0 +1,50 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: sa-frontend
+spec:
+  replicas: 1
+  minReadySeconds: 15
+  strategy:
+    type: RollingUpdate
+    rollingUpdate: 
+      maxUnavailable: 1
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        app: sa-frontend
+    spec:
+      containers:
+      - image: rinormaloku/sentiment-analysis-frontend:feedback
+        imagePullPolicy: Always
+        name: sa-frontend
+        ports:
+          - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sa-frontend
+spec:
+  ports:
+  - port: 80
+    targetPort: 80
+  selector:
+    app: sa-frontend
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: sa-ingress-frontend
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /
+        backend:
+          serviceName: sa-frontend
+          servicePort: 80
