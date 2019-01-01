@@ -15,6 +15,8 @@ variables:
 jobs:
 - job: SA_Frontend
   steps:
+  - script: docker login -u $(dockerId) -p $(password)
+    displayName: 'docker login'
   - script: docker build -f ./sa-frontend/Dockerfile -t $(sa-frontend-image-name) ./sa-frontend
     displayName: 'docker build frontend'
   - script: docker push $(sa-frontend-image-name) 
@@ -22,6 +24,8 @@ jobs:
 
 - job: SA_WebApp
   steps:
+  - script: docker login -u $(dockerId) -p $(password)
+    displayName: 'docker login'
   - script: docker build -f ./sa-webapp/Dockerfile -t $(sa-frontend-image-name) ./sa-webapp
     displayName: 'docker build webapp'
   - script: docker push $(sa-web-app-image-name) 
@@ -29,6 +33,8 @@ jobs:
 
 - job: SA_Logic
   steps:
+  - script: docker login -u $(dockerId) -p $(password)
+    displayName: 'docker login'
   - script: docker build -f ./sa-logic/Dockerfile -t $(sa-frontend-image-name) ./sa-logic
     displayName: 'docker build logic'
   - script: docker push $(sa-logic-image-name) 
@@ -36,6 +42,8 @@ jobs:
 
 - job: SA_Feedback
   steps:
+  - script: docker login -u $(dockerId) -p $(password)
+    displayName: 'docker login'
   - script: docker build -f ./sa-feedback/Dockerfile -t $(sa-frontend-image-name) ./sa-feedback
     displayName: 'docker build feedback'
   - script: docker push $(sa-feedback-image-name) 
