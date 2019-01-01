@@ -53,5 +53,5 @@ jobs:
   steps:
   - task: PublishBuildArtifacts@1
     inputs:
-      pathtoPublish: '$(Build.ArtifactStagingDirectory)'
+      pathtoPublish: '$(System.DefaultWorkingDirectory)/resource-manifests'
       artifactName: resource-manifests
