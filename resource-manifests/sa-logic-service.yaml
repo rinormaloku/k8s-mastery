@@ -16,7 +16,7 @@ spec:
         app: sa-logic
     spec:
       containers:
-      - image: rinormaloku/sentiment-analysis-logic:#{Build.BuildId}#
+      - image: rinormaloku/sentiment-analysis-logic:{{TAG}}
         imagePullPolicy: Always
         name: sa-logic
         ports:

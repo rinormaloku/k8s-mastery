@@ -16,7 +16,7 @@ spec:
         app: sa-web-app
     spec:
       containers:
-      - image: rinormaloku/sentiment-analysis-web-app:#{Build.BuildId}#
+      - image: rinormaloku/sentiment-analysis-web-app:{{TAG}}
         imagePullPolicy: Always
         name: sa-web-app
         env:
