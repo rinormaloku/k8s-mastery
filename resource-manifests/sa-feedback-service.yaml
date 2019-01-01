@@ -11,7 +11,7 @@ spec:
         app: sa-feedback
     spec:
       containers:
-      - image: rinormaloku/sentiment-analysis-feedback:#{Build.BuildId}#
+      - image: rinormaloku/sentiment-analysis-feedback:{{Build.BuildId}}
         imagePullPolicy: Always
         name: sa-feedback
         env:
