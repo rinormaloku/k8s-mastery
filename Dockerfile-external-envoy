@@ -1,0 +1,2 @@
+FROM envoyproxy/envoy:latest
+CMD /usr/local/bin/envoy -c /etc/external-envoy.yaml --service-cluster front-proxy
