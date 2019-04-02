@@ -15,6 +15,7 @@ spec:
       labels:
         app: sa-web-app
     spec:
+      terminationGracePeriodSeconds: 60
       containers:
       - image: rinormaloku/sentiment-analysis-web-app:destroyable
         imagePullPolicy: Always
@@ -24,4 +25,16 @@ spec:
             value: "http://sa-logic"
         ports:
           - containerPort: 8080
-      terminationGracePeriodSeconds: 100
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+        readinessProbe:
+          httpGet:  
+            path: /health
+            port: 8080
+          periodSeconds: 5
+          failureThreshold: 1
+          successThreshold: 1
+          initialDelaySeconds: 30
+          timeoutSeconds: 1

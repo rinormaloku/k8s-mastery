@@ -1,0 +1,15 @@
+GET http://localhost:8080/health HTTP/1.1
+
+###
+
+GET http://localhost:8080/destroy HTTP/1.1
+
+###
+
+POST http://localhost:8080/sentiment HTTP/1.1
+content-type: application/json
+
+{
+    "sentence": "I love yogobella!"
+}
+###

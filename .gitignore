@@ -13,3 +13,5 @@ target/
 # IDE ignored files
 .idea/
 *.iml
+sa-webapp/.project
+sa-webapp/.settings
