@@ -180,6 +180,8 @@ Observations:
 * In terminal #1 you will see that the unhealthy service goes into Not Ready state `Ready (0/1)` as the readiness probe has failed.
 * In terminal #1 after approx. 30 seconds, the container will restart as the liveness probe has failed and a couple of seconds more and it will switch to ready state.
 
+**Bonus:** In kubernetes you can check the logs of the last pod by using --previous flag. Also `kubectl logs <pod-name> --previous`
+
 # Summary
 In this article you learned about Liveness and Readiness probes. 
 * How they work together to ensure that the application is healthy and 
