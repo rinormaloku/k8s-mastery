@@ -76,7 +76,7 @@ Memory issues are not spared us either. For optimizing performance applications 
 
 Solutions:
 * In the JVM you can limit the heap using the -Xmx option.
-* In dotnet there is no possibility to limit the memory usage, but you can optimize for less memory consumption by setting the following flag:
+* In dotnet core there is no possibility to limit the memory usage, but you can optimize for less memory consumption by setting the following flag:
 ```xml
   <PropertyGroup> 
     <ServerGarbageCollection>false</ServerGarbageCollection>
@@ -84,3 +84,13 @@ Solutions:
 ```
 
 Make sure to inform yourself for the environments that your application uses, before going to prod.
+
+## Summary
+
+We covered the basics that we need to know about resource requests and limtis. 
+* How they work together to optimize hardware usage.
+* How the scheduler uses this information for scheduling pods.
+* Memory limits will get your container killed (not a big deal as you should treat the app as disposable, but you need to take the steps to optimize performace).
+* Basic information about limitting memory usage in JVM and dotnet core.
+
+But there are more details that need to be looked up like: MostRequestedPriority, LeastRequestedPriority, Quality of Service classes, Request Quotas, Limit Ranges etc. Those help with further optimizing hardware usage.
