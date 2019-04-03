@@ -13,3 +13,7 @@ target/
 # IDE ignored files
 .idea/
 *.iml
+sa-webapp/.classpath
+sa-webapp/.project
+sa-webapp/.settings
+.vscode
