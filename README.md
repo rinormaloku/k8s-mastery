@@ -138,7 +138,7 @@ Sounds good let's apply the following readiness probe:
 ```
         readinessProbe:
           httpGet:  
-            path: /health
+            path: /ready
             port: 8080
           periodSeconds: 5
           failureThreshold: 1
