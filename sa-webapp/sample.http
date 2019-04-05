@@ -1,6 +1,9 @@
 GET http://localhost:8080/health HTTP/1.1
 
 ###
+GET http://localhost:8080/ready HTTP/1.1
+
+###
 
 GET http://localhost:8080/destroy HTTP/1.1
 

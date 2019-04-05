@@ -37,6 +37,14 @@ public class SentimentController {
         return "SA-Web-App is healthy";
     }
 
+    @GetMapping("/ready")
+    public String testReadiness() {
+        if (destroyed)
+            throw new InternalServerErrorException("Failure");
+        
+        return "SA-Web-App is ready to recieve requests";
+    }
+
     @GetMapping("/destroy")
     public String destroy() {
         destroyed = true;
