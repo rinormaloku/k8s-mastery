@@ -1,4 +1,4 @@
-apiVersion: extensions/v1beta1
+apiVersion: app/v1
 kind: Deployment                                          # 1
 metadata:
   name: sa-frontend
@@ -10,6 +10,9 @@ spec:
     rollingUpdate: 
       maxUnavailable: 1                                   # 4
       maxSurge: 1                                         # 5
+  selector:
+    matchLabels:
+      app: sa-frontend      
   template:
     metadata:
       labels:
