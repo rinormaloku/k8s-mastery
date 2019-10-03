@@ -1,8 +1,13 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment                                          # 1
 metadata:
   name: sa-frontend
+  labels:
+    app: sa-frontend
 spec:
+  selector:
+    matchLabels:
+      app: sa-frontend
   replicas: 2                                             # 2
   minReadySeconds: 15
   strategy:

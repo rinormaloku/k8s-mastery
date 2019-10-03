@@ -1,8 +1,13 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: sa-logic
+  labels:
+    app: sa-logic
 spec:
+  selector:
+     matchLabels:
+       app: sa-logic
   replicas: 2
   minReadySeconds: 15
   strategy:
