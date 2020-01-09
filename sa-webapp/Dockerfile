@@ -1,7 +1,7 @@
 FROM maven:3.5-jdk-8-alpine AS builder
-COPY src /sa-webapp/src
 COPY pom.xml /sa-webapp
 RUN mvn -f /sa-webapp/pom.xml clean package
+COPY src /sa-webapp/src
 
 ENV SA_LOGIC_API_URL http://localhost:5000
 
